@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from hashlib import sha1
 
@@ -30,4 +31,9 @@ def register_handle(request):
     user.save()
 
     # 注册成功, 转到登录页面
-    return redirect('login')
+    return redirect('/login/')
+
+def register_exist(request):    #判断用户名是否已经存在
+    user_name = request.GET.get('user_name')
+    count = UserInfo.objects.filter(user_name=user_name).count()    #count为0或1
+    return JsonResponse({'count':count})
