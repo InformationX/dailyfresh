@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'df_user'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,8 @@ DATABASES = {
         'NAME': 'DailyFresh',
         'PASSWORD':'970202',
         'USER':'root',
-        'HOST':'3306',
+        'HOST':'127.0.0.1',
+        'PORT':'3306'
     }
 }
 
