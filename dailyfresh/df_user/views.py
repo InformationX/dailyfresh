@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from hashlib import sha1
 
 # Create your views here.
+from df_goods.models import GoodsInfo
+from df_user import user_decorator
 from df_user.models import *
 
 
@@ -73,5 +75,18 @@ def login_handle(request):
             context = {'title':'用户登录', 'error_name':0, 'error_pwd':1, 'username':user_name, 'pwd':password}
             return render(request, 'df_user/login.html', context)
     context = {'title': '用户登录', 'error_name': 1, 'error_pwd': 0, 'username': user_name, 'upwd': password}
-    return render(request, 'df_user/index.html', context)
+    return render(request, 'index/index.html', context)
 
+@user_decorator.login
+def info(request):      #个人信息
+    user_email = UserInfo.objects.get(id=request.session['user_id']).email
+    goods_ids1=request.session.get(str(request.session['user_id']),'')
+    goods_list = []
+    for goods_id in goods_ids1:
+        goods_list.append(GoodsInfo.objects.get(id=int(goods_id)))
+    context = {'title':'用户中心',
+               'user_name':request.session['username'],
+               'user_email': user_email,
+               'goods_list':goods_list,
+            }
+    return render(request, 'df_user/user_center_info.html', context)

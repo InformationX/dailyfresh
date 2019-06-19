@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^ueditor/', include('DjangoUeditor.urls')),     #富文本编辑器
     url(r'', include('df_user.urls')),
-    url(r'', include('index.urls'))
+    url(r'', include('df_goods.urls')),
 ]
