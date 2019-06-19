@@ -37,3 +37,13 @@ def register_exist(request):    #判断用户名是否已经存在
     user_name = request.GET.get('user_name')
     count = UserInfo.objects.filter(user_name=user_name).count()    #count为0或1
     return JsonResponse({'count':count})
+
+def login(request):
+    '''
+    登录
+    :param request:
+    :return:
+    '''
+    user_name = request.COOKIES.get('user_name', '')
+    context = {'title':'用户登录', 'error_name':0, 'error_pwd':0, 'uname': user_name}
+    return render(request, 'df_user/index.html', context)
