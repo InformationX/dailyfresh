@@ -78,6 +78,12 @@ def login_handle(request):
     context = {'title': '用户登录', 'error_name': 1, 'error_pwd': 0, 'username': user_name, 'upwd': password}
     return render(request, 'df_goods/index.html', context)
 
+def logout(request):
+    """注销登录"""
+    del request.session['user_id']
+    del request.session['username']
+    return redirect('/')
+
 @user_decorator.login
 def info(request):      #个人信息
     user_email = UserInfo.objects.get(id=request.session['user_id']).email
