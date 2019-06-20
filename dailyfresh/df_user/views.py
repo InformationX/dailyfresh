@@ -62,8 +62,9 @@ def login_handle(request):
         s1 = sha1()
         s1.update(password.encode('utf-8'))
         if s1.hexdigest() == users[0].password:
-            url = request.COOKIES.get('url', 'df_user/login')
+            url = request.COOKIES.get('url', '/')
             red = HttpResponseRedirect(url)
+            # 记住用户名
             if remeber != 0:
                 red.set_cookie('username', user_name)
             else:
@@ -75,7 +76,7 @@ def login_handle(request):
             context = {'title':'用户登录', 'error_name':0, 'error_pwd':1, 'username':user_name, 'pwd':password}
             return render(request, 'df_user/login.html', context)
     context = {'title': '用户登录', 'error_name': 1, 'error_pwd': 0, 'username': user_name, 'upwd': password}
-    return render(request, 'index/index.html', context)
+    return render(request, 'df_goods/index.html', context)
 
 @user_decorator.login
 def info(request):      #个人信息
