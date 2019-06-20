@@ -97,3 +97,13 @@ def info(request):      #个人信息
                'goods_list':goods_list,
             }
     return render(request, 'df_user/user_center_info.html', context)
+
+@user_decorator.login
+def order(request):
+    """
+    全部订单
+    :param request:
+    :return:
+    """
+    context = {'title':'用户中心'}
+    return render(request, 'df_user/user_center_order.html', context)

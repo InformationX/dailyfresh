@@ -9,7 +9,6 @@
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
 			<div class="fr">
-
 				{% if request.session.username|default:'' != '' %}		<!--默认为空,不为空时说明已经登录-->
                     <div class="login_btn fl">
                         <a>欢迎您:</a>
@@ -24,6 +23,7 @@
                         <a href="/register/">注册</a>
                     </div>
                 {% endif %}
+            </div>
 
 				<div class="user_link fl">
 					<span>|</span>
