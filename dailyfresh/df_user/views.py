@@ -107,3 +107,16 @@ def order(request):
     """
     context = {'title':'用户中心'}
     return render(request, 'df_user/user_center_order.html', context)
+
+@user_decorator.login
+def site(request):
+    user = UserInfo.objects.get(id=request.session['user_id'])
+    if request.method == 'POST':
+        post = request.POST
+        user.recv_name = post.get('recv_name')
+        user.address = post.get('address')
+        user.you_bian = post.get('you_bian')
+        user.phone = post.get('phone')
+    context = {'title':'用户中心', 'user':user}
+    user.save()
+    return render(request, 'df_user/user_center_site.html',context)
