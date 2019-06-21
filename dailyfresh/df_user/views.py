@@ -86,14 +86,16 @@ def logout(request):
 
 @user_decorator.login
 def info(request):      #个人信息
-    user_email = UserInfo.objects.get(id=request.session['user_id']).email
+    user_phone = UserInfo.objects.get(id=request.session['user_id']).phone
+    user_address = UserInfo.objects.get(id=request.session['user_id']).address
     goods_ids1=request.session.get(str(request.session['user_id']),'')
     goods_list = []
     for goods_id in goods_ids1:
         goods_list.append(GoodsInfo.objects.get(id=int(goods_id)))
     context = {'title':'用户中心',
                'user_name':request.session['username'],
-               'user_email': user_email,
+               'user_phone': user_phone,
+               'user_address': user_address,
                'goods_list':goods_list,
             }
     return render(request, 'df_user/user_center_info.html', context)
