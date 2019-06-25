@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 
 # Create your views here.
@@ -29,9 +30,39 @@ def index(request):             #主页
     }
     return render(request, 'df_goods/index.html', context)
 
+def list(request, tid, pindex, sort):
+    """
+    商品列表页
+    :param request:
+    :param tid: 所属分类
+    :param pindex:分页
+    :param sort: 排序方式
+    :return:
+    """
+    typeinfo = TypeInfo.objects.get(id=int(tid))
+    news = typeinfo.goodsinfo_set.order_by('-id')[0:2]
+    if sort == '1':
+        goods_list = GoodsInfo.objects.filter(goods_type_id=int(tid)).order_by('-id')
+    elif sort == '2':
+        goods_list = GoodsInfo.objects.filter(goods_type_id=int(tid)).order_by('-goods_price')
+    elif sort == '3':
+        goods_list = GoodsInfo.objects.filter(goods_type_id=int(tid)).order_by('goods_click')
+    paginator = Paginator(goods_list, 10)
+    page = paginator.page(int(pindex))
+    context = {
+        'title':typeinfo.type_title,
+        'page':page,
+        'typeinfo':typeinfo,
+        'news':news,
+        'sort':sort,
+        'paginator':paginator,
+    }
+    return render(request, 'df_goods/list.html', context)
+
+
 def detail(request, id):
     goods_id = GoodsInfo.objects.get(id=int(id))
-    goods_click = goods_id.goods_click + 1
+    goods_id.goods_click = goods_id.goods_click + 1
     goods_id.save()
     goods_title = goods_id.goods_title
     goods_pic = goods_id.goods_pic
