@@ -168,7 +168,11 @@
 			<div class="tab_content">
 				<dl>
 					<dt>商品详情：</dt>
-					<span><s:property value="goods_id.goods_content" escape="false"/>{{ goods_id.goods_content }}</span>
+					<dd>
+                        {% autoescape off %}
+                            {{ goods_id.goods_content }}
+                        {% endautoescape %}
+                    </dd>
 				</dl>
 			</div>
 

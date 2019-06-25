@@ -92,7 +92,7 @@ def detail(request, id):
         key = str(request.session.get('user_id'))
         goods_ids = request.session.get(key, '')
         goods_id = str(goods_id.id)  # 将int型转化为str类型
-        if goods_ids != '':  # 判断是否有浏览记录,如果则继续判断
+        if goods_ids != '':  # 判断是否有浏览记录,如果有则继续判断
             if goods_ids.count(goods_id) >= 1:  # 如果已经存在,删除掉
                 goods_ids.remove(goods_id)
             goods_ids.insert(0, goods_id)  # 添加到第一个
