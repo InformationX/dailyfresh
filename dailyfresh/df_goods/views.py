@@ -28,3 +28,29 @@ def index(request):             #主页
         'type5': type5, 'type51': type51,
     }
     return render(request, 'df_goods/index.html', context)
+
+def detail(request, id):
+    goods_id = GoodsInfo.objects.get(id=int(id))
+    goods_click = goods_id.goods_click + 1
+    goods_id.save()
+    goods_title = goods_id.goods_title
+    goods_pic = goods_id.goods_pic
+    goods_price = goods_id.goods_price
+    goods_jianjie = goods_id.goods_jianjie
+    goods_content = goods_id.goods_content
+    goods_unit = goods_id.goods_unit
+    news = goods_id.goods_type.goodsinfo_set.order_by('-id')[0:2]
+
+
+    # goods_click
+    context = {
+        'goods_id':goods_id,
+        'goods_title':goods_title,
+        'goods_pic':goods_pic,
+        'goods_price':goods_price,
+        'goods_jianjie':goods_jianjie,
+        'goods_content':goods_content,
+        'goods_unit':goods_unit,
+        'news':news,
+    }
+    return render(request, 'df_goods/detail.html', context)
