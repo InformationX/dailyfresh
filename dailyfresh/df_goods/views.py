@@ -84,4 +84,23 @@ def detail(request, id):
         'goods_unit':goods_unit,
         'news':news,
     }
-    return render(request, 'df_goods/detail.html', context)
+
+    response = render(request, 'df_goods/detail.html', context)
+
+    # 记录浏览历史记录, 用户中心显示
+    if request.session.has_key('user_id'):  # 判断是否已经登录
+        key = str(request.session.get('user_id'))
+        goods_ids = request.session.get(key, '')
+        goods_id = str(goods_id.id)  # 将int型转化为str类型
+        if goods_ids != '':  # 判断是否有浏览记录,如果则继续判断
+            if goods_ids.count(goods_id) >= 1:  # 如果已经存在,删除掉
+                goods_ids.remove(goods_id)
+            goods_ids.insert(0, goods_id)  # 添加到第一个
+            if len(goods_ids) >= 6:  # 如果超过6个则删除最后一个
+                del goods_ids[5]
+        else:
+            goods_ids = []
+            goods_ids.append(goods_id)
+        request.session[key] = goods_ids
+
+    return response
