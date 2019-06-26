@@ -42,3 +42,15 @@ def add(request, gid, count):       #分别为商品的id和数量
         return JsonResponse({'count':count})
     else:
         return redirect('/cart/')   #转到购物车
+
+@user_decorator.login
+def edit(request, gid, count):
+    try:
+        if request.is_ajax():
+            goods = CartInfo.objects.get(id=int(gid))
+            goods.count=int(count)
+            goods.save()
+            data={'ok':1}
+    except Exception as e:
+        data={'ok':int(count)}
+    return JsonResponse(data)
