@@ -54,3 +54,14 @@ def edit(request, gid, count):
     except Exception as e:
         data={'ok':int(count)}
     return JsonResponse(data)
+
+@user_decorator.login
+def delete(request, gid):
+    try:
+        if request.is_ajax():
+            goods = CartInfo.objects.get(id=int(gid))
+            goods.delete()
+            data={'ok':1}
+    except Exception as e:
+        data={'ok':0, 'e':e}
+    return JsonResponse(data)
