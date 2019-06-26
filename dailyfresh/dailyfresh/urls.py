@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^ueditor/', include('DjangoUeditor.urls')),     #富文本编辑器
     url(r'', include('df_user.urls')),
     url(r'', include('df_goods.urls')),
-    url(r'', include('df_carts.urls')),
+    url(r'^cart/', include('df_carts.urls')),
 ]
 if settings.DEBUG:
     # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

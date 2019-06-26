@@ -117,7 +117,7 @@
             });
         });
     </script>
-{% endblock %}
+{% endblock head%}
 {% block body %}
     <div class="header_con">
 		<div class="header">
@@ -167,13 +167,13 @@
 		<li class="col05">小计</li>
 		<li class="col06">操作</li>
 	</ul>
-    {% for cart in cart %}
-        <ul class="cart_list_td clearfix">
+    {% for cart in carts %}
+        <ul class="cart_list_td clearfix" id="{{ cart.id }}">
             <li class="col01"><input type="checkbox" name="" checked="checked"></li>
-            <li class="col02"><img src="/upload/{{ cart.goods_id.goods_pic }}"></li>
-            <li class="col03">{{ cart.goods_id.goods_title }}</li>
-            <li class="col04">{{ cart.goods_id.goods_unit }}</li>
-            <li class="col05">{{ cart.goods_id.goods_price }}</li>
+            <li class="col02"><img src="/upload/{{ cart.goods.goods_pic }}/"></li>
+            <li class="col03">{{cart.goods.gtitle}}<br><em>{{cart.goods.goods_price}}/{{cart.goods.goods_unit}}</em></li>
+            <li class="col04">{{cart.goods.goods_unit}}</li>
+            <li class="col05">{{cart.goods.goods_price}}</li>
             <li class="col06">
                 <div class="num_add">
                     <a href="javascript:;" class="add fl">+</a>
