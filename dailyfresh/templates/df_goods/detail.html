@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
-{% block head %}{% endblock head %}
-
-
-{% block body %}
+{% block head %}
     <script>
         $(function () {
             $('#jiahao').click(function () {
@@ -24,15 +21,15 @@
                 if(num){        //如果不为空
                     if (num < 1)        //如果小于1
                         num = 1;
-                    price = parseFloat($('#gprice').text());    //text() 方法方法设置或返回被选元素的文本内容。
+                    price = parseFloat($('#goods_price').text());    //text() 方法方法设置或返回被选元素的文本内容。
                     total = num * price;
                     $('#shuliang').val(num);
                     $('#gtotal').text(total.toFixed(2) + '元');  //toFixed(num) 方法可把原来的数四舍五入为小数位数为num的数字。
                 } else {
                     $('#shuliang').val(1);
-                    price = parseFloat($('#gprice').text());    //text() 方法方法设置或返回被选元素的文本内容。
+                    price = parseFloat($('#goods_price').text());    //text() 方法方法设置或返回被选元素的文本内容。
                     total = 1.0 * price;
-                    $('#gtotal').text(total.toFixed(2) + '元');  //toFixed(num) 方法可把原来的数四舍五入为小数位数为num的数字。
+                    $('#gtotal').total.toFixed(2) + '元';  //toFixed(num) 方法可把原来的数四舍五入为小数位数为num的数字。
                 }
                 }
             );
@@ -73,6 +70,10 @@
             }
         })
     </script>
+{% endblock head %}
+
+{% block body %}
+
     <div class="header_con">
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
@@ -135,7 +136,7 @@
 					<a href="javascript:;" class="minus fr" id="jianhao">-</a>
 				</div>
 			</div>
-			<div class="total">总价：<em id="gtotal">{{ goods_price }}元</em></div>
+			<div class="total">总价：<em id="gtotal">{{ goods_id.goods_price }}元</em></div>
 			<div class="operate_btn">
 				<a href="javascript:;" class="buy_btn">立即购买</a>
 				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>
