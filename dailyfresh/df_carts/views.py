@@ -43,6 +43,7 @@ def add(request, gid, count):       #分别为商品的id和数量
     else:
         return redirect('/cart/')   #转到购物车
 
+
 @user_decorator.login
 def edit(request, gid, count):
     try:
