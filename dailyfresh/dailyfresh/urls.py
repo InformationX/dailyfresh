@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'', include('df_user.urls')),
     url(r'', include('df_goods.urls')),
     url(r'^cart/', include('df_carts.urls')),
+    url(r'', include('df_orders.urls')),
 ]
 if settings.DEBUG:
     # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
