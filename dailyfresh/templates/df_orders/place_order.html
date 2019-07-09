@@ -112,12 +112,12 @@
 		{%for order in orderlist %}
 		<ul class="goods_list_td clearfix" id="{{order.order_id}}">
 			<li class="col01">{{order.orderid}}</li>
-			<li class="col02"><img src="/static/{{order.goods.gpic}}"></li>
-			<li class="col03">{{order.goods.gtitle}}</li>
-			<li class="col04">{{order.goods.gunit}}</li>
-			<li class="col05">{{order.goods.gprice}}</li>
+			<li class="col02"><img src="/static/{{order.goods.goods_pic}}"></li>
+			<li class="col03">{{order.goods.goods_title}}</li>
+			<li class="col04">{{order.goods.goods_unit}}</li>
+			<li class="col05">{{order.goods.goods_price}}</li>
 			<li class="col06">{{order.count}}</li>
-			<li class="col07">{{order.goods.gprice}}</li>
+			<li class="col07">{{order.goods.goods_price}}</li>
 		</ul>
 		{%endfor%}
 	</div>

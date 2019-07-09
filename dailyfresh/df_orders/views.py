@@ -74,10 +74,7 @@ def order_handle(request):
         # 遍历购物车中提交信息，创建订单详情表
         for orderid in orderlist:
             cartinfo = CartInfo.objects.get(id=orderid)
-            # good = GoodsInfo.objects.get(cartinfo__id=cartinfo.id)
             good = GoodsInfo.objects.get(pk=cartinfo.goods_id)
-            # print '*'*10
-            # print cartinfo.goods_id
             # 判断库存是否够
             if int(good.gkucun) >= int(cartinfo.count):
                 # 库存够，移除购买数量并保存
@@ -114,9 +111,6 @@ def pay(request,oid):
     order.zhifu = 1
 
     order.save()
-    # except Exception as e:
-    # print '==================%s' % e
-    # transaction.savepoint_rollback(tran_id)
     print('*' * 10)
     print(order.zhifu)
     print(order.oid)
